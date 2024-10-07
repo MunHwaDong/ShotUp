@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public int maxScore { get; set; }
+    private Data playerData;
+
+    private ScoreViewModel scoreViewModel;
 
     GameManager()
     {
@@ -23,12 +26,19 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        scoreViewModel = GameObject.FindGameObjectWithTag("UIManager").GetComponent<ScoreViewModel>();
+
+        if(scoreViewModel != null)
+        {
+            scoreViewModel.onDestoryViewModel += UpdatePlayerData;
+        }
+
         EventBus.Publish(EventType.START);
     }
 
-    public void UpdateMaxScore(int maxScore)
+    private void UpdatePlayerData(Data data)
     {
-        this.maxScore = maxScore;
+        maxScore = data.maxScore;
     }
 
 }

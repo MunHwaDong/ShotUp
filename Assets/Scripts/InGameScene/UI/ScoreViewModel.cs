@@ -15,6 +15,9 @@ public class ScoreViewModel : MonoBehaviour
     public delegate void OnChangeMaxScore(int maxScore);
     public event OnChangeMaxScore onChangeMaxScore;
 
+    public delegate void OnDestoryViewModel(Data data);
+    public event OnDestoryViewModel onDestoryViewModel;
+
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -25,7 +28,7 @@ public class ScoreViewModel : MonoBehaviour
 
     void OnDestroy()
     {
-        gameManager.GetComponent<GameManager>().UpdateMaxScore(playerData.maxScore);
+        onDestoryViewModel?.Invoke(playerData.GetInGameData());
     }
 
     private void Init(ref PlayerData playerData)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerData
 {
     private int currentScore;
+    public int money { get; private set; }
     public int maxScore { get; private set; }
 
     public delegate void OnUpdateCurrentScore(int score);
@@ -42,4 +43,10 @@ public class PlayerData
         maxScore = Mathf.Max(maxScore, currentScore);
         onUpdateMaxScore?.Invoke(maxScore);
     }
+
+    public Data GetInGameData()
+    {
+        return new Data(maxScore, currentScore + money);
+    }
+
 }

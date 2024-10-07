@@ -7,6 +7,9 @@ TagManager:
   - Background
   - GameManager
   - SoundManager
+  - MainTitle
+  - Shop
+  - UIManager
   layers:
   - Default
   - TransparentFX
