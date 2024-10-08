@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private float pos = 0;
 
     private SpriteRenderer spriteRenderer;
+    private Sprite playerSprite;
+
     private AudioSource audioSource;
 
     private float dir = -1;
@@ -100,5 +102,10 @@ public class PlayerController : MonoBehaviour
     {
         if (pos >= -screenBound.x - spriteWidth) dir = -1;
         if (pos <= screenBound.x + spriteWidth) dir = 1;
+    }
+
+    public void SetPlayerSprite(Sprite sprite)
+    {
+        spriteRenderer.sprite = sprite;
     }
 }

@@ -40,13 +40,14 @@ public class PlayerData
 
     public void UpdateMaxScore()
     {
+        money += currentScore;
         maxScore = Mathf.Max(maxScore, currentScore);
         onUpdateMaxScore?.Invoke(maxScore);
     }
 
     public Data GetInGameData()
     {
-        return new Data(maxScore, currentScore + money);
+        return new Data(maxScore, money);
     }
 
 }

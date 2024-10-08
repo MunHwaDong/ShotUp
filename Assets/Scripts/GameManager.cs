@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public int maxScore { get; set; }
-    private Data playerData;
+    public Data playerData;
 
     private ScoreViewModel scoreViewModel;
+    private ShopManager shopManager;
 
     GameManager()
     {
-        maxScore = 0;
+        this.playerData = new Data();
     }
 
     private void Start()
@@ -26,19 +26,23 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        scoreViewModel = GameObject.FindGameObjectWithTag("UIManager").GetComponent<ScoreViewModel>();
+        if(scene.name == "InGame")
+            scoreViewModel = GameObject.FindGameObjectWithTag("UIManager").GetComponent<ScoreViewModel>();
 
-        if(scoreViewModel != null)
-        {
+        else if(scene.name == "Main")
+            shopManager = GameObject.FindGameObjectWithTag("ShopManager").GetComponent<ShopManager>();
+
+        if (scoreViewModel != null)
             scoreViewModel.onDestoryViewModel += UpdatePlayerData;
-        }
+        if (shopManager != null)
+            shopManager.updatePlayerData += UpdatePlayerData;
 
         EventBus.Publish(EventType.START);
     }
 
     private void UpdatePlayerData(Data data)
     {
-        maxScore = data.maxScore;
+        playerData = new Data(data);
     }
 
 }

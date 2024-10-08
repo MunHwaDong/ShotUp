@@ -21,7 +21,8 @@ public class ScoreViewModel : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        playerData = new PlayerData(gameManager.maxScore);
+
+        playerData = new PlayerData(gameManager.playerData.maxScore);
 
         Init(ref this.playerData);
     }

@@ -8,8 +8,8 @@ TagManager:
   - GameManager
   - SoundManager
   - MainTitle
-  - Shop
   - UIManager
+  - ShopManager
   layers:
   - Default
   - TransparentFX
