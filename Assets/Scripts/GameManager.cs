@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    //GameManager의 생성자에서 Data를 new 해주니, Singleton의 생성자를 덮어버리고 계속 씬이 전환될 때마다 새로운 Data 클래스를 new 해주는 것 같아
+    //GameManager의 생성자를 제거
     public static Data playerData = new Data();
 
     private ScoreViewModel scoreViewModel;
