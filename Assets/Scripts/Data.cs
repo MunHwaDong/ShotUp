@@ -21,12 +21,12 @@ public class Data
         this.money = money;
     }
 
-    public Data(string userId, int maxScore, int money, Sprite playerSprite)
+    public Data(string userId, int maxScore, int money, Sprite sprite)
     {
         this.userId = userId;
         this.maxScore = maxScore;
         this.money = money;
-        this.playerSprite = playerSprite;
+        this.playerSprite = sprite;
     }
 
     public void CopyData(Data data)
@@ -42,6 +42,6 @@ public class Data
 
     public void SetSprite(Sprite sprite)
     {
-        playerSprite = sprite;
+        this.playerSprite = sprite;
     }
 }

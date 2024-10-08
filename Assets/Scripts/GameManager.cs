@@ -6,21 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static Data playerData;
+    public static Data playerData = new Data();
 
     private ScoreViewModel scoreViewModel;
     private ShopManager shopManager;
 
-    GameManager()
-    {
-        playerData = new Data();
-    }
-
-    public void Awake()
+    public void Start()
     {
         Sprite defalutSprite = Resources.Load<Sprite>("char_paperairplane");
 
-        playerData.SetSprite(defalutSprite);
+        GameManager.playerData.SetSprite(defalutSprite);
 
         //씬 로드 후 업데이트 함수가 언제 호출되는지 이해함
         //씬 로드는 동기적으로 씬이 로드되는 동안, 로드되는 씬에서 동작하는 코드들과는 동기적이지만,
@@ -30,26 +25,28 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "InGame")
+        if (scene.name == "InGame")
         {
             scoreViewModel = GameObject.FindGameObjectWithTag("UIManager").GetComponent<ScoreViewModel>();
 
             if (scoreViewModel != null)
                 scoreViewModel.onDestoryViewModel += UpdatePlayerData;
 
-
             EventBus.Publish(EventType.START);
         }
-        else if(scene.name == "Main")
+
+        else if (scene.name == "Main")
+        {
             shopManager = GameObject.FindGameObjectWithTag("ShopManager").GetComponent<ShopManager>();
 
-        if (shopManager != null)
-            shopManager.updatePlayerData += UpdatePlayerData;
+            if (shopManager != null)
+                shopManager.updatePlayerData += UpdatePlayerData;
+        }
     }
 
     private void UpdatePlayerData(Data data)
     {
-        playerData.CopyData(data);
+        GameManager.playerData.CopyData(data);
     }
 
 }
