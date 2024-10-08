@@ -5,9 +5,8 @@ using UnityEngine;
 public class ScoreViewModel : MonoBehaviour
 {
     private const int C_IncreaseScorePoint = 1;
-    private GameManager gameManager;
 
-    private PlayerData playerData;
+    private PlayData playerData;
     
     public delegate void OnChangeCurrentScore(int score);
     public event OnChangeCurrentScore onChangeCurrentScore;
@@ -15,14 +14,12 @@ public class ScoreViewModel : MonoBehaviour
     public delegate void OnChangeMaxScore(int maxScore);
     public event OnChangeMaxScore onChangeMaxScore;
 
-    public delegate void OnDestoryViewModel(Data data);
+    public delegate void OnDestoryViewModel(Data result);
     public event OnDestoryViewModel onDestoryViewModel;
 
     private void Awake()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
-        playerData = new PlayerData(gameManager.playerData.maxScore);
+        playerData = new PlayData(GameManager.playerData.maxScore);
 
         Init(ref this.playerData);
     }
@@ -32,7 +29,7 @@ public class ScoreViewModel : MonoBehaviour
         onDestoryViewModel?.Invoke(playerData.GetInGameData());
     }
 
-    private void Init(ref PlayerData playerData)
+    private void Init(ref PlayData playerData)
     {
         playerData.onUpdateCurrentScore += ChangeCurrentScore;
         playerData.onUpdateMaxScore += ChangeMaxScore;

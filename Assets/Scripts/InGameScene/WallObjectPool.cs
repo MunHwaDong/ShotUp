@@ -8,8 +8,8 @@ public class WallObjectPool : MonoBehaviour
     [SerializeField]
     private List<GameObject> wallPrefab;
 
-    private int stackCapacity = 10;
-    private int maxPoolSize = 10;
+    private int stackCapacity = 3;
+    private int maxPoolSize = 3;
 
     private Vector3 wallSpawnPos;
     private float distanceToCam = 12f;

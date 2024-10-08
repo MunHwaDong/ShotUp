@@ -21,19 +21,27 @@ public class Data
         this.money = money;
     }
 
-    public Data(Data data)
-    {
-        this.userId = data.userId;
-        this.maxScore = data.maxScore;
-        this.money = data.money;
-        this.playerSprite = data.playerSprite;
-    }
-
     public Data(string userId, int maxScore, int money, Sprite playerSprite)
     {
         this.userId = userId;
         this.maxScore = maxScore;
         this.money = money;
         this.playerSprite = playerSprite;
+    }
+
+    public void CopyData(Data data)
+    {
+        this.maxScore = data.maxScore;
+        this.money = data.money;
+
+        if(data.playerSprite)
+        {
+            this.playerSprite = data.playerSprite;
+        }
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        playerSprite = sprite;
     }
 }

@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     private float pos = 0;
 
     private SpriteRenderer spriteRenderer;
-    private Sprite playerSprite;
 
     private AudioSource audioSource;
 
@@ -32,6 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+
+        spriteRenderer.sprite = GameManager.playerData.playerSprite;
 
         playerInitPos = gameObject.transform.position;
         screenBound = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));

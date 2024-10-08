@@ -8,8 +8,6 @@ public class ShopManager : MonoBehaviour
     [SerializeField]
     private List<Product> products;
 
-    private GameManager gameManager;
-
     private int productIdx = 0;
 
     public delegate void UpdateProduct(Product prod);
@@ -23,11 +21,14 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         updateProduct?.Invoke(products[productIdx]);
-        updateMoney?.Invoke(gameManager.playerData.money);
 
         gameObject.transform.parent.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        updateMoney?.Invoke(GameManager.playerData.money);
     }
 
     public void ShowPreviousProduct()
@@ -44,12 +45,12 @@ public class ShopManager : MonoBehaviour
 
     public void BuyProduct()
     {
-        int change = gameManager.playerData.money - products[productIdx].price;
+        int change = GameManager.playerData.money - products[productIdx].price;
 
         if (change < 0) return;
 
-        Data newData = new Data(gameManager.playerData.userId,
-                                gameManager.playerData.maxScore,
+        Data newData = new Data(GameManager.playerData.userId,
+                                GameManager.playerData.maxScore,
                                 change,
                                 products[productIdx].productImage);
 
