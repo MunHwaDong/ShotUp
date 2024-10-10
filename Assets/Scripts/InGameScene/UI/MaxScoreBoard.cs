@@ -6,7 +6,7 @@ using TMPro;
 public class MaxScoreBoard : MonoBehaviour
 {
     [SerializeField]
-    private ScoreViewModel scoreViewModel;
+    private PlayDataViewModel playDataViewModel;
 
     private TextMeshProUGUI maxScoreText;
 
@@ -14,7 +14,7 @@ public class MaxScoreBoard : MonoBehaviour
     {
         maxScoreText = GetComponent<TextMeshProUGUI>();
 
-        scoreViewModel.onChangeMaxScore += ChangeMaxScore;
+        playDataViewModel.onChangeMaxScore += ChangeMaxScore;
     }
 
     private void ChangeMaxScore(int maxScore)

@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     //GameManager의 생성자를 제거
     public static Data playerData = new Data();
 
-    private ScoreViewModel scoreViewModel;
+    private PlayDataViewModel playDataViewModel;
     private ShopManager shopManager;
 
     public void Start()
@@ -29,10 +29,10 @@ public class GameManager : Singleton<GameManager>
     {
         if (scene.name == "InGame")
         {
-            scoreViewModel = GameObject.FindGameObjectWithTag("UIManager").GetComponent<ScoreViewModel>();
+            playDataViewModel = GameObject.FindGameObjectWithTag("UIManager").GetComponent<PlayDataViewModel>();
 
-            if (scoreViewModel != null)
-                scoreViewModel.onDestoryViewModel += UpdatePlayerData;
+            if (playDataViewModel != null)
+                playDataViewModel.onDestoryViewModel += UpdatePlayerData;
 
             EventBus.Publish(EventType.START);
         }

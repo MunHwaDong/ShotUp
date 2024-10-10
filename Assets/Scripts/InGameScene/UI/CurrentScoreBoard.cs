@@ -8,13 +8,13 @@ public class CurrentScoreBoard : MonoBehaviour
     private TextMeshProUGUI scoreText;
 
     [SerializeField]
-    private ScoreViewModel scoreViewModel;
+    private PlayDataViewModel playDataViewModel;
 
     private void Awake()
     {
         scoreText = GetComponent<TextMeshProUGUI>();
 
-        scoreViewModel.onChangeCurrentScore += ChangeScore;
+        playDataViewModel.onChangeCurrentScore += ChangeScore;
     }
 
     private void ChangeScore(int newScore)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreViewModel : MonoBehaviour
+public class PlayDataViewModel : MonoBehaviour
 {
     private const int C_IncreaseScorePoint = 1;
 
