@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EventBus : MonoBehaviour
+public class EventBus
 {
     private static readonly IDictionary<EventType, UnityEvent> events = new Dictionary<EventType, UnityEvent>();
 

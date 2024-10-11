@@ -6,7 +6,7 @@ public class PlayDataViewModel : MonoBehaviour
 {
     private const int C_IncreaseScorePoint = 1;
 
-    private PlayData playerData;
+    private PlayData playData;
     
     public delegate void OnChangeCurrentScore(int score);
     public event OnChangeCurrentScore onChangeCurrentScore;
@@ -19,20 +19,20 @@ public class PlayDataViewModel : MonoBehaviour
 
     private void Awake()
     {
-        playerData = new PlayData(GameManager.playerData.maxScore);
+        playData = new PlayData(GameManager.playerData.maxScore);
 
-        Init(ref this.playerData);
+        Init(ref this.playData);
     }
 
     void OnDestroy()
     {
-        onDestoryViewModel?.Invoke(playerData.GetInGameData());
+        onDestoryViewModel?.Invoke(playData.GetInGameData());
     }
 
-    private void Init(ref PlayData playerData)
+    private void Init(ref PlayData playData)
     {
-        playerData.onUpdateCurrentScore += ChangeCurrentScore;
-        playerData.onUpdateMaxScore += ChangeMaxScore;
+        playData.onUpdateCurrentScore += ChangeCurrentScore;
+        playData.onUpdateMaxScore += ChangeMaxScore;
 
         EventBus.Subscribe(EventType.IDLE, IncreaseCurrentScore);
         EventBus.Subscribe(EventType.CRUSH, UpdateMaxScore);
@@ -51,16 +51,16 @@ public class PlayDataViewModel : MonoBehaviour
 
     private void ResetCurrentScore()
     {
-        playerData.ResetCurrentScore();
+        playData.ResetCurrentScore();
     }
 
     public void IncreaseCurrentScore()
     {
-        playerData.UpdateCurrentScore(C_IncreaseScorePoint);
+        playData.UpdateCurrentScore(C_IncreaseScorePoint);
     }
 
     public void UpdateMaxScore()
     {
-        playerData.UpdateMaxScore();
+        playData.UpdateMaxScore();
     }
 }

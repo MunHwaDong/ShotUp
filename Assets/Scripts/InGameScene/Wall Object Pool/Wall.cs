@@ -63,7 +63,6 @@ public class Wall : MonoBehaviour
     {
         coroutine = null;
 
-        //재시작하면, 모든 벽들은 Pool로 돌아간다.
         ReturnToPool();
     }
 
